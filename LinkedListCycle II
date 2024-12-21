@@ -1,0 +1,14 @@
+    public ListNode detectCycle(ListNode head) {
+        Set<ListNode> set=new HashSet<>();
+        ListNode temp=head;
+
+        while(!set.contains(temp))
+        {
+            if(temp==null)
+            break;
+            set.add(temp);
+            temp=temp.next;
+            
+        }
+        return temp;
+    }
