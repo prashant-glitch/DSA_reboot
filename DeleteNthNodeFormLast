@@ -1,0 +1,26 @@
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        //find out the size of linked list;
+        int size=0;
+        ListNode temp=head;
+        while(temp!=null)
+        {
+            size++;
+            temp=temp.next;
+        }
+        if(size<n)
+        return head;
+        temp=head;
+        for(int i=0;i<size-n-1;i++)
+        {
+            temp=temp.next;
+        }
+        if(size-n==0)
+        return temp.next;
+        if(temp.next==null)
+        return temp.next;
+        else
+        temp.next=temp.next.next;
+        return head;
+    }
+}
