@@ -1,0 +1,34 @@
+class Codechef
+{
+    public static void recur(char[] arr,int n, List<Character> cur, List<List<Character>>res)
+    {
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i;j<n;j++)
+            {
+                cur.add(arr[j]);
+                res.add(new ArrayList<>(cur));
+            }
+            cur.clear();
+        }
+    }
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		char arr[]={'a','b','c'};
+		int n=arr.length;
+		List<List<Character>>res=new ArrayList<>();
+		List<Character>cur=new ArrayList<>();
+		recur(arr,0,n,cur,res);
+		System.out.println("all sub array are:");
+		for(List<Character> num:res)
+		{
+		    for(char a:num)
+		    {
+		        System.out.print(a+" ");
+		    }
+		    System.out.println();
+		}
+
+	}
+}
