@@ -1,0 +1,25 @@
+    public int maxMeetings(int start[], int end[]) {
+        // add your code here
+        
+        //there will be one array which ll store pair
+        List<Pair>list=new ArrayList<>();
+        for(int i=0;i<start.length;i++)
+        {
+            list.add(new Pair(start[i],end[i]));
+        }
+        Collections.sort(list);
+       
+        int count=0;
+  
+        
+        int e=-1;
+        for(Pair p:list)
+        {
+            if(p.st>e)
+            {
+                count++;
+                e=p.en;
+            }
+        }
+        return count;
+    }
