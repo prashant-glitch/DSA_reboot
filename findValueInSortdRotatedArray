@@ -1,0 +1,46 @@
+public int search(int[] nums, int target) {
+        int n = nums.length;
+        int h = n - 1;
+        int l = 0;
+
+        // Find the pivot
+        int p = pivoti(nums, l, h);
+
+        // Check which segment the target is in
+        if (target >= nums[l] && target <= nums[p]) {
+            return bSearch(nums, l, p, target);
+        } else {
+            return bSearch(nums, p + 1, h, target);
+        }
+    }
+
+    public int pivoti(int[] nums, int l, int h) {
+        while (l < h) {
+            int mid = l + (h - l) / 2;
+            // Pivot condition: nums[mid] > nums[mid + 1]
+            if (nums[mid] > nums[mid + 1]) {
+                return mid;
+            }
+            // Pivot is in the right half if nums[mid] >= nums[l]
+            else if (nums[mid] >= nums[l]) {
+                l = mid + 1;
+            } else {
+                h = mid;
+            }
+        }
+        return l; // Return the smallest element index (pivot in fully sorted arrays)
+    }
+
+    public int bSearch(int[] nums, int low, int high, int target) {
+        while (low <= high) {
+            int mid = low + (high - low) / 2; // Avoid overflow
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] > target) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
