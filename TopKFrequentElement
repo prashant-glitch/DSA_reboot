@@ -1,0 +1,49 @@
+//time complexity 
+// O(2n)+O(k)
+//space complexity
+//O(2n)+O(k)
+
+class Solution {
+    static class Pair implements Comparable<Pair>{
+        int e;
+        int f;
+        Pair(int e,int f)
+        {
+            this.e=e;
+            this.f=f;
+        }
+        @Override
+        public String toString()
+        {
+            return "element "+e+" "+"frequency "+f;
+        }
+
+        @Override
+        public int compareTo(Pair that)
+        {
+            return that.f-this.f;
+        }
+    }
+    public int[] topKFrequent(int[] nums, int k) {
+        // PriorityQueue<Pair>minHeap=new PriorityQueue<>();
+        List<Pair>list=new ArrayList<>();
+        Map<Integer,Integer>map=new HashMap<>();
+        int res[]=new int[k];
+        for(int i=0;i<nums.length;i++)
+        {
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        }
+
+        for(Map.Entry<Integer,Integer>e:map.entrySet())
+        {
+            Pair p=new Pair(e.getKey(),e.getValue());
+            list.add(p);
+        }
+        Collections.sort(list);
+        for(int i=0;i<k;i++)
+        {
+            res[i]=list.get(i).e;
+        }
+        return res;
+    }
+}
