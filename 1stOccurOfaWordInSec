@@ -1,0 +1,16 @@
+public int strStr(String haystack, String needle) {
+        int l=0;
+        int r=needle.length();
+        int index=-1;
+        for(int i=0;i<haystack.length()-needle.length()+1;i++)
+        {
+            String sub=haystack.substring(i+l,i+r);
+            System.out.println(sub);
+            if(needle.equals(sub))
+            {
+                index=i;
+                break;
+            }
+        }
+        return index;
+    }
