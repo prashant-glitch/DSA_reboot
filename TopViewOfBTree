@@ -1,0 +1,51 @@
+class Solution {
+
+//we have declared Pair class static bcz we can call static val or methods, class from static methods and here top view is static method
+    static class Pair{
+        int hd;
+        Node node;
+        Pair(int hd,Node node)
+        {
+            this.hd=hd;
+            this.node=node;
+        }
+    }
+    // Function to return a list of nodes visible from the top view
+    // from left to right in Binary Tree.
+    static ArrayList<Integer> topView(Node root) {
+        // code here
+        ArrayList<Integer>res=new ArrayList<>();
+        if(root==null)
+        return res;
+        
+        Map<Integer,Integer>map=new TreeMap<>();
+        Queue<Pair>q=new LinkedList<>();
+        q.offer(new Pair(0,root));
+        while(!q.isEmpty())
+        {
+            Pair p=q.poll();
+            Node node=p.node;
+            int hd=p.hd;
+            if(!map.containsKey(hd))
+            {
+                map.put(hd,node.data);
+            }
+            if(node.left!=null)
+            {
+                q.offer(new Pair(hd-1,node.left));
+            }
+            if(node.right!=null)
+            {
+                q.offer(new Pair(hd+1,node.right));
+            }
+        }
+        for(Map.Entry<Integer,Integer>e:map.entrySet())
+        {
+            res.add(e.getValue());
+        }
+        return res;
+        
+        
+        
+    }
+}
