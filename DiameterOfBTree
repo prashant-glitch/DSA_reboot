@@ -1,0 +1,24 @@
+class Solution {
+    public int diameterOfBinaryTree(TreeNode root) {
+        int maxi[]=new int[1];
+        int h=height(root,maxi);
+        return maxi[0];
+
+
+    }
+    public int height(TreeNode root,int[]maxi)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        int lefth=height(root.left,maxi);
+        int righth=height(root.right,maxi);
+        //to calculate the length of path for that node
+        maxi[0]=Math.max(maxi[0],lefth+righth);
+
+        //return the height for the node
+        return 1+Math.max(lefth,righth);
+
+    }
+}
