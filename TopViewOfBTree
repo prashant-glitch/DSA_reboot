@@ -1,6 +1,7 @@
 class Solution {
 
 //we have declared Pair class static bcz we can call static val or methods, class from static methods and here top view is static method
+// if we dont want to make Pair as static then we need to define this Pair class outside of this Solution class
     static class Pair{
         int hd;
         Node node;
