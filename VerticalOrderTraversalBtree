@@ -1,0 +1,49 @@
+class Solution {
+    class Tri{
+        TreeNode node;
+        int hd;
+        int vd;
+        Tri(TreeNode node, int hd,int vd)
+        {
+            this.node=node;
+            this.hd=hd;
+            this.vd=vd;
+        }
+    }
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        Map<Integer, TreeMap<Integer, List<Integer>>> map = new TreeMap<>();
+        Queue<Tri>q=new LinkedList<>();
+        List<List<Integer>>res=new ArrayList<>();
+        q.offer(new Tri(root,0,0));
+
+        while(!q.isEmpty())
+        {
+            Tri t=q.poll();
+            TreeNode node=t.node;
+            int hd=t.hd;
+            int vd=t.vd;
+            map.putIfAbsent(hd, new TreeMap<>());
+            map.get(hd).putIfAbsent(vd, new ArrayList<>());
+            map.get(hd).get(vd).add(node.val);
+            if(node.left!=null)
+            {
+                q.offer(new Tri(node.left,hd-1,vd+1));
+
+            }
+            if(node.right!=null)
+            {
+                q.offer(new Tri(node.right,hd+1,vd+1));
+            }
+        }
+            for (Map.Entry<Integer, TreeMap<Integer, List<Integer>>> entry : map.entrySet()) {
+            List<Integer> verticalList = new ArrayList<>();
+            for (Map.Entry<Integer, List<Integer>> levelEntry : entry.getValue().entrySet()) {
+                List<Integer> nodesAtLevel = levelEntry.getValue();
+                Collections.sort(nodesAtLevel); // Sort nodes at the same level
+                verticalList.addAll(nodesAtLevel);
+            }
+            res.add(verticalList);
+        }
+        return res;
+    }
+}
