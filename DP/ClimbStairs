@@ -1,0 +1,70 @@
+class Solution {
+    // public int climbStairs(int n) {
+    //     if(n==1)
+    //     return 1;
+    //     if(n==2)
+    //     return 2;
+    //     return climbStairs(n-1)+climbStairs(n-2);
+    // }
+
+    // public int climbStairs(int n) {
+    //     int dp[]=new int[n+1];
+    //     return climb(n,dp);
+    // }
+    // public int climb(int n,int[]dp)
+    // {
+    //     if(n==1)
+    //     {
+    //         dp[1]=1;
+    //         return dp[1];
+    //     }
+    //     if(n==2)
+    //     {
+    //         dp[2]=2;
+    //         return dp[2];
+    //     }
+    //     if(dp[n]!=0)
+    //     {
+    //         return dp[n];
+    //     }
+    //     dp[n]=climb(n-1,dp)+climb(n-2,dp);
+    //     return dp[n];
+    // }
+
+    //to remove call stack space we can use tabulation instead of momization
+
+    // public int climbStairs(int n)
+    // {
+    //     //for tabulation we need to store data for the base case
+    //     //in this case we TC O(n) and SC O(n) no call stack
+    //     int dp[]=new int[n+1];
+    //     if(n<=1)
+    //     return 1;
+    //     dp[1]=1;
+    //     dp[2]=2;
+    //     for(int i=3;i<=n;i++)
+    //     {
+    //         dp[i]=dp[i-1]+dp[i-2];
+    //     }
+    //     return dp[n];
+    // } 
+
+    //as our function depends on only last two variable we should not store all result
+    public int climbStairs(int n)
+    {
+        if(n==1)
+        return 1;
+        if(n==2)
+        return 2;
+        int p2=1;
+        int p1=2;
+        int res=0;
+        for(int i=3;i<=n;i++)
+        {
+            res=p2+p1;
+            p2=p1;
+            p1=res;
+        }
+        return res;
+    }
+}
