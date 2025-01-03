@@ -1,0 +1,64 @@
+class Solution {
+    //using recursion
+    public int fib(int n) {
+       //base case
+       if(n==0)
+       return 0;
+       if(n==1)
+       return 1;
+
+       //body
+       //return statement 
+       return fib(n-1)+fib(n-2);
+    }
+
+//top - down approach i.e memoization
+// which means the state we are solving we are storing it...
+// where ever return statement we need to store it.
+    
+    public int fib(int n) {
+        //we are creating array to memoize the solved state result
+        //n+1 because we need to store 0 as well as number it self
+       int dp[]=new int[n+1];
+       Arrays.fill(dp,-1);
+       return fibnocai(n,dp);
+    }
+
+    //this is top down approach tc o(n) sc O(n) -- function call stack
+    public int fibnocai(int n, int[]dp)
+    {
+        if(n==0)
+        {
+            dp[0]=0;
+            return dp[n];
+        }
+        if(n==1)
+        {
+            dp[1]=1;
+            return dp[n];
+        }
+        if(dp[n]!=-1)
+        {
+            return dp[n];
+        }
+        dp[n]=fibnocai(n-1,dp)+fibnocai(n-2,dp);
+        return dp[n];
+    }
+
+
+    //to avoid function call stack we will use bottom up approach
+    public int fib(int n)
+    {
+        //we have base case fib(0)=0 and fib(1)=1
+        if(n<=1)
+        return n;
+        int dp[]=new int[n+1];
+        dp[0]=0;
+        dp[1]=1;
+        for(int i=2;i<=n;i++)
+        {
+            dp[i]=dp[i-1]+dp[i-2];
+        }
+        return dp[n];
+    }
+}
