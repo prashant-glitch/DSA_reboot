@@ -1,0 +1,33 @@
+class Solution {
+    // Function to calculate the number of subsets with a given sum
+    public int perfectSum(int[] nums, int target) {
+        // code here
+        int n=nums.length;
+        int dp[]=new int[1];
+        dp[0]=0;
+        
+        recur(nums,0,target,dp,n);
+        int val=dp[0];
+        return val;
+    }
+    public void recur(int []nums,int index,int target,int []dp,int n)
+    {
+        //base case
+        if(index==n)
+        {
+            if(target==0)
+            {
+                dp[0]++;
+            }
+            return ;
+        }
+        
+        //pick 
+
+        if(nums[index]<=target)
+        recur(nums,index+1,target-nums[index],dp,n);
+        //no pick
+        recur(nums,index+1,target,dp,n);
+ 
+    }
+}
