@@ -1,0 +1,47 @@
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        
+        int n=coins.length;
+        int dp[][]=new int[n+1][amount+1];
+        for (int i = 0; i <= n; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+        int res=recur(coins,n-1,amount,dp);
+        return (res==Integer.MAX_VALUE)?-1:res;
+    }
+
+    public int recur(int[]coins, int index,int amount,int [][]dp)
+    {
+     if (amount == 0) 
+     {
+        dp[index][amount]=0;
+        return 0; 
+     }// Base case: No more amount to cover
+
+
+        if (index < 0 || amount < 0)
+        {
+            // dp[index][amount]
+            return Integer.MAX_VALUE; // Invalid state
+        }
+
+        // Case 1: Don't pick the current coin
+        if (dp[index][amount] != -1) {
+            return dp[index][amount];
+        }
+        int noPick = recur(coins, index - 1, amount,dp);
+
+        // Case 2: Pick the current coin if it's valid
+        int pick = Integer.MAX_VALUE;
+        if (coins[index] <= amount) {
+            int subResult = recur(coins, index, amount - coins[index],dp);
+            if (subResult != Integer.MAX_VALUE) {
+                pick = 1 + subResult; // Add 1 because we picked a coin
+            }
+        }
+
+        // Return the minimum of the two cases
+        dp[index][amount]= Math.min(pick, noPick);
+        return  dp[index][amount];
+    }
+}
