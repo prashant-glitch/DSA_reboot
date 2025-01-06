@@ -1,0 +1,26 @@
+class Solution {
+    // Function to return max value that can be put in knapsack of capacity.
+    static int knapSack(int capacity, int val[], int wt[]) {
+        // code here
+        int n=val.length;
+        return recur(capacity,val,wt,0,n,0);
+    }
+    
+    public static int recur(int k, int[]val,int []wt,int index,int n,int sum)
+    {
+        if(index==n)
+        {
+            return sum;
+        }
+        
+        int pick=0;
+        if(wt[index]<=k)
+        {
+            
+            pick=recur(k-wt[index],val,wt,index+1,n,sum+val[index]);
+        }
+        int nopick=recur(k,val,wt,index+1,n,sum);
+        return Math.max(pick,nopick);
+        
+    }
+}
