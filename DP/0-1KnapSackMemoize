@@ -1,0 +1,41 @@
+class Solution {
+    // Function to return max value that can be put in knapsack of capacity.
+    static int knapSack(int capacity, int val[], int wt[]) {
+        // code here
+        int n=val.length;
+        int dp[][]=new int[n+1][capacity+1];
+        for(int i=0;i<n+1;i++)
+        {
+            for(int j=0;j<capacity+1;j++)
+            {
+                dp[i][j]=-1;
+            }
+        }
+        return recur(capacity,val,wt,0,n,dp);
+    }
+    
+    public static int recur(int k, int[]val,int []wt,int index,int n,int dp[][])
+    {
+        if(index==n)
+        {
+            return 0;
+        }
+        if(dp[index][k]!=-1)
+        {
+            return dp[index][k];
+        }
+        // Don't pick the current item
+        int noPick = recur(k, val, wt, index + 1, n,dp);
+        
+        // Pick the current item if weight allows
+        int pick = 0;
+        if (wt[index] <= k) {
+            pick = val[index] + recur(k - wt[index], val, wt, index + 1,n, dp);
+        }
+        
+        // Store and return the maximum value
+        dp[index][k] = Math.max(pick, noPick);
+        return dp[index][k];
+        
+    }
+}
