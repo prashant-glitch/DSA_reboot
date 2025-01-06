@@ -1,0 +1,40 @@
+class Solution {
+    public int change(int amount, int[] coins) {
+        int n=coins.length;
+
+        int dp[][]=new int[n+1][amount+1];
+        for(int i=0;i<n+1;i++)
+        {
+            Arrays.fill(dp[i],-1);
+        }
+        int res=recur(coins,amount,n-1,dp);
+        return res;
+    }
+
+    public int recur(int coins[],int amount, int index,int [][]dp)
+    {
+        //base case
+        if(index<0 || amount<0)
+        {
+            return 0;
+        }
+        if(amount==0)
+        {
+            return 1;
+        }
+        if(index==-1 && amount>0)
+        return 0;
+        if(dp[index][amount]!=-1)
+        {
+            return dp[index][amount];
+        }
+        int pick=0;
+        if(coins[index]<=amount)
+        {
+            pick=recur(coins,amount-coins[index],index,dp);
+        }
+        int noPick=recur(coins,amount,index-1,dp);
+        dp[index][amount]=pick+noPick;
+        return  dp[index][amount];
+    }
+}
