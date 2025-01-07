@@ -1,0 +1,24 @@
+class Solution {
+    public int cutRod(int[] price) {
+        // code here
+        int n=price.length;
+        int rod[]=new int[n];
+        for(int i=0;i<n;i++)
+        {
+            rod[i]=i+1;
+        }
+        return recur(price,rod,n,0);
+    }
+    public int recur(int price[],int rod[], int capacity,int index)
+    {
+        if(index==price.length)
+        {
+            return 0;
+        }
+        int pick=0;
+        if(rod[index]<=capacity)
+        pick=price[index]+recur(price,rod,capacity-rod[index],index);
+        int noPick=recur(price,rod,capacity,index+1);
+        return Math.max(pick,noPick);
+    }
+}
