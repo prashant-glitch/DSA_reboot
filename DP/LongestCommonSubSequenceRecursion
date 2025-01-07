@@ -1,0 +1,31 @@
+class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        if(text1.length()==0 || text2.length()==0)
+        return 0;
+
+        int n1=text1.length();
+        int n2=text2.length();
+        return recur(text1,text2,n1,n2,0,0);
+    }
+
+    public int recur(String s1,String s2, int n1,int n2, int index1,int index2)
+    {
+        if(index1==n1 || index2==n2)
+        {
+            return 0;
+        }
+
+        int pick=0;
+         if(s1.charAt(index1)==s2.charAt(index2))
+         {
+            pick=1+recur(s1,s2,n1,n2,index1+1,index2+1);
+         }
+         else
+         {
+            pick=recur(s1,s2,n1,n2,index1+1,index2);
+         }
+        int noPick=recur(s1,s2,n1,n2,index1,index2+1);
+
+        return Math.max(pick,noPick);
+    }
+}
