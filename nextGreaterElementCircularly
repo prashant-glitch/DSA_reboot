@@ -1,0 +1,29 @@
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n=nums.length;
+        int []res=new int[n];
+        boolean found=false;
+        for(int i=0;i<n;i++)
+        {
+            found=false;
+            int j=i+1;
+            int t=j%n;
+            while(i!=t)
+            {
+                t=j%n;/// find circularly
+                if(nums[t]>nums[i])
+                {
+                    res[i]=nums[t];
+                    found=true;
+                    break;
+                }
+                j++;
+            }
+            if(!found)
+            {
+                res[i]=-1;
+            }
+        }
+        return res;
+    }
+} 
