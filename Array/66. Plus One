@@ -1,0 +1,17 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+        List<Integer>res=new ArrayList<>();
+        int r=1;
+        int d=0;
+        for(int i=digits.length-1;i>=0;i--)
+        {
+            d=(digits[i]+r)%10;
+            r=(digits[i]+r)/10;
+            res.add(d);
+        }
+        if(r>0)
+        res.add(r);
+        Collections.reverse(res);
+        return res.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
